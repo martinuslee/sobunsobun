@@ -1,0 +1,6 @@
+{
+  "name": "소분소분 (SobunSobun)",
+  "description": "이웃과 신선한 식재료를 함께 사고 나누는 동네 공동구매 소분 플랫폼",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
