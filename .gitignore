@@ -2,3 +2,7 @@
 node_modules
 out
 .env.local
+.env
+*.tsbuildinfo
+__pycache__/
+*.sqlite3
