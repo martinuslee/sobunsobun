@@ -26,16 +26,25 @@ Install Command: pip install -r requirements.txt
 - FastAPI
 - SQLAlchemy ORM
 - Alembic
-- SQLite
+- SQLite for local fallback
+- Supabase Postgres for deployed DB
 
 ## Database
 
-SQLite file: `backend/sobunsobun.sqlite3`
+기본값은 SQLite 파일입니다: `backend/sobunsobun.sqlite3`
+
+Supabase를 사용할 때는 `backend/.env` 또는 배포 환경변수에 `SOBUN_DATABASE_URL`을 설정합니다.
 
 Override:
 
 ```bash
 SOBUN_DATABASE_URL=sqlite:///./backend/dev.sqlite3 make migrate
+```
+
+Supabase pooler 예시:
+
+```bash
+SOBUN_DATABASE_URL="postgresql+psycopg://postgres.PROJECT_REF:PASSWORD@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres?sslmode=require"
 ```
 
 Normalized tables:
