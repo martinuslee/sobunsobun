@@ -36,6 +36,8 @@ Install Command: pip install -r requirements.txt
 Supabase 예시의 `SUPABASE_URL`, `SUPABASE_KEY`는 Supabase API 클라이언트용입니다.
 현재 백엔드는 SQLAlchemy/Alembic로 DB에 직접 연결하므로 `backend/.env` 또는 배포 환경변수에 `SOBUN_DATABASE_URL` 같은 Postgres 접속 URL을 설정해야 합니다.
 
+DB 설계 상세 문서: [`docs/database-design.md`](docs/database-design.md)
+
 Override:
 
 ```bash
@@ -47,18 +49,6 @@ Supabase pooler 예시:
 ```bash
 SOBUN_DATABASE_URL="postgresql+psycopg://postgres.PROJECT_REF:PASSWORD@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres?sslmode=require"
 ```
-
-Normalized tables:
-
-- `users`: 가입 사용자와 모집글 작성자
-- `categories`: 대분류/소분류. `parent_id`로 계층 구성
-- `locations`: 동네/지역
-- `group_buy_items`: 공동구매 모집글. 작성자/카테고리/지역은 FK로 참조
-- `chat_messages`: 모집글별 채팅 메시지. 작성자와 모집글을 FK로 참조
-- `notifications`: 사용자별 알림
-- `reviews`: 모집글 리뷰. 리뷰어/호스트/모집글을 FK로 참조
-- `tags`: 리뷰 태그
-- `review_tags`: 리뷰와 태그의 N:M 연결
 
 ## API
 
