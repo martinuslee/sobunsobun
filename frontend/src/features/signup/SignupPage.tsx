@@ -66,8 +66,8 @@ export function SignupPage() {
     setMessage('');
     try {
       const user = await api.signup({ name: name.trim(), email: email.trim(), password, passwordConfirm });
-      sessionStorage.setItem('sobunsobun_current_user_name', user.name);
-      sessionStorage.setItem('sobunsobun_seen_landing', '1');
+      localStorage.setItem('sobunsobun_current_user_name', user.name);
+      localStorage.setItem('sobunsobun_seen_landing', '1');
       setCurrentUserName(user.name);
       setHasSeenLanding(true);
       router.push('/');

@@ -30,10 +30,10 @@ export function HomePage() {
   });
 
   useEffect(() => {
-    const storedUserName = sessionStorage.getItem('sobunsobun_current_user_name');
+    const storedUserName = localStorage.getItem('sobunsobun_current_user_name') ?? sessionStorage.getItem('sobunsobun_current_user_name');
     if (storedUserName) setCurrentUserName(storedUserName);
 
-    if (hasSeenLanding || sessionStorage.getItem('sobunsobun_seen_landing') === '1') {
+    if (hasSeenLanding || localStorage.getItem('sobunsobun_seen_landing') === '1' || sessionStorage.getItem('sobunsobun_seen_landing') === '1') {
       setShowLanding(false);
       setHasSeenLanding(true);
     }

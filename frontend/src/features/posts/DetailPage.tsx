@@ -18,7 +18,7 @@ export function DetailPage({ itemId }: { itemId: string }) {
   const navigate = useScreenNavigation(item?.id);
 
   useEffect(() => {
-    const storedUserName = sessionStorage.getItem('sobunsobun_current_user_name');
+    const storedUserName = localStorage.getItem('sobunsobun_current_user_name') ?? sessionStorage.getItem('sobunsobun_current_user_name');
     if (storedUserName) setCurrentUserName(storedUserName);
   }, [setCurrentUserName]);
 

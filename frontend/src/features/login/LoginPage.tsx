@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { api } from '@/lib/api';
@@ -14,9 +14,19 @@ export function LoginPage() {
   const setHasSeenLanding = useAppStore((state) => state.setHasSeenLanding);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberLogin, setRememberLogin] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState('');
   const emailValid = EMAIL_PATTERN.test(email.trim());
+
+  useEffect(() => {
+    const storedUserName = localStorage.getItem('sobunsobun_current_user_name');
+    if (!storedUserName) return;
+
+    setCurrentUserName(storedUserName);
+    setHasSeenLanding(true);
+    router.replace('/');
+  }, [router, setCurrentUserName, setHasSeenLanding]);
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,8 +39,10 @@ export function LoginPage() {
     setMessage('');
     try {
       const user = await api.login({ email: email.trim(), password });
-      sessionStorage.setItem('sobunsobun_current_user_name', user.name);
-      sessionStorage.setItem('sobunsobun_seen_landing', '1');
+      const storage = rememberLogin ? localStorage : sessionStorage;
+      storage.setItem('sobunsobun_current_user_name', user.name);
+      storage.setItem('sobunsobun_seen_landing', '1');
+      if (!rememberLogin) localStorage.removeItem('sobunsobun_current_user_name');
       setCurrentUserName(user.name);
       setHasSeenLanding(true);
       router.push('/');
@@ -74,6 +86,16 @@ export function LoginPage() {
               className="w-full h-12 rounded-xl border border-[#c1c9b6] bg-white px-4 text-[15px] outline-none focus:border-[#316b00]"
               placeholder="8자 이상"
             />
+          </label>
+
+          <label className="flex items-center gap-2 text-[13px] font-bold text-[#41493a]">
+            <input
+              type="checkbox"
+              checked={rememberLogin}
+              onChange={(event) => setRememberLogin(event.target.checked)}
+              className="size-4 accent-[#316b00]"
+            />
+            자동로그인
           </label>
 
           {message && <p className="text-[13px] font-bold text-[#ba1a1a]">{message}</p>}

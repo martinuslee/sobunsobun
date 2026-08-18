@@ -22,6 +22,8 @@ export function HistoryPage() {
     window.scrollTo(0, 0);
   };
   const logout = () => {
+    localStorage.removeItem('sobunsobun_current_user_name');
+    localStorage.removeItem('sobunsobun_seen_landing');
     sessionStorage.removeItem('sobunsobun_current_user_name');
     sessionStorage.removeItem('sobunsobun_seen_landing');
     setCurrentUserName('');

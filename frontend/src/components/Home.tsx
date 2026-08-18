@@ -106,7 +106,7 @@ export const Home: React.FC<HomeProps> = ({
       <main className="flex-1 max-w-4xl w-full mx-auto px-5 pt-3">
         <section className="mb-5 -mx-5 px-5 flex justify-center">
           <div className="max-w-full overflow-x-auto no-scrollbar py-1">
-            <div className="flex w-max gap-1.5 rounded-full bg-[#ffffff] border border-[#e0e4d7] p-1 shadow-xs">
+            <div className="flex w-max gap-2">
               {categories.map((cat) => {
                 const isSelected = selectedCategory === cat.name;
                 return (
@@ -115,10 +115,10 @@ export const Home: React.FC<HomeProps> = ({
                     id={`cat-btn-${cat.name}`}
                     type="button"
                     onClick={() => setSelectedCategory(cat.name)}
-                    className={`h-10 rounded-full px-3 flex items-center justify-center gap-1.5 whitespace-nowrap text-[13px] font-bold transition-all cursor-pointer ${
+                    className={`h-10 rounded-full px-3.5 flex items-center justify-center gap-1.5 whitespace-nowrap text-[13px] font-bold border shadow-xs transition-all cursor-pointer ${
                       isSelected
-                        ? 'bg-[#316b00] text-[#ffffff] shadow-sm'
-                        : 'text-[#41493a] hover:bg-[#f2f5e8]'
+                        ? 'bg-[#316b00] border-[#316b00] text-[#ffffff]'
+                        : 'bg-[#ffffff] border-[#e0e4d7] text-[#41493a] hover:bg-[#f2f5e8]'
                     }`}
                   >
                     <span className={`material-symbols-outlined text-[18px] ${isSelected ? 'fill-1 text-[#ffffff]' : 'text-[#316b00]'}`}>
