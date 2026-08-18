@@ -33,7 +33,8 @@ Install Command: pip install -r requirements.txt
 
 기본값은 SQLite 파일입니다: `backend/sobunsobun.sqlite3`
 
-Supabase를 사용할 때는 `backend/.env` 또는 배포 환경변수에 `SOBUN_DATABASE_URL`을 설정합니다.
+Supabase 예시의 `SUPABASE_URL`, `SUPABASE_KEY`는 Supabase API 클라이언트용입니다.
+현재 백엔드는 SQLAlchemy/Alembic로 DB에 직접 연결하므로 `backend/.env` 또는 배포 환경변수에 `SOBUN_DATABASE_URL` 같은 Postgres 접속 URL을 설정해야 합니다.
 
 Override:
 
