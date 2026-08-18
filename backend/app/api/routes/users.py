@@ -8,9 +8,9 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from backend.app.db.session import get_db
-from backend.app.models import User
-from backend.app.schemas import EmailAvailabilityRead, UserLoginCreate, UserRead, UserSignupCreate
+from ...db.session import get_db
+from ...models import User
+from ...schemas import EmailAvailabilityRead, UserLoginCreate, UserRead, UserSignupCreate
 
 router = APIRouter(prefix="/users", tags=["users"])
 EMAIL_PATTERN = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")

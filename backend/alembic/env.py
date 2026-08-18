@@ -1,11 +1,24 @@
 from logging.config import fileConfig
+from pathlib import Path
+import sys
 
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 
-from backend.app.core.config import settings
-from backend.app.db.base import Base
-from backend.app import models  # noqa: F401
+backend_root = Path(__file__).resolve().parents[1]
+project_root = backend_root.parent
+for path in (str(project_root), str(backend_root)):
+    if path not in sys.path:
+        sys.path.insert(0, path)
+
+try:
+    from backend.app.core.config import settings
+    from backend.app.db.base import Base
+    from backend.app import models  # noqa: F401
+except ModuleNotFoundError:
+    from app.core.config import settings
+    from app.db.base import Base
+    from app import models  # noqa: F401
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.database_url)

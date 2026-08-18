@@ -9,6 +9,18 @@ make backend
 
 Health check: `GET http://localhost:8000/health`
 
+## Deploy
+
+Vercel에서 백엔드만 배포할 때:
+
+```text
+Root Directory: backend
+Entry: app/main.py
+Install Command: pip install -r requirements.txt
+```
+
+이 구조에서는 앱이 `app.main`으로 import됩니다. 로컬 프로젝트 루트에서는 기존처럼 `backend.app.main`으로 실행해도 됩니다.
+
 ## Stack
 
 - FastAPI

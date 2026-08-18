@@ -8,6 +8,7 @@ interface HistoryProps {
   currentLocation: string;
   onNavigate: (screen: ScreenType) => void;
   onSelectItem: (item: GroupBuyItem) => void;
+  onLogout: () => void;
 }
 
 export const History: React.FC<HistoryProps> = ({
@@ -15,6 +16,7 @@ export const History: React.FC<HistoryProps> = ({
   currentLocation,
   onNavigate,
   onSelectItem,
+  onLogout,
 }) => {
   const [activeTab, setActiveTab] = useState<'ongoing' | 'completed' | 'liked'>('completed');
 
@@ -22,14 +24,24 @@ export const History: React.FC<HistoryProps> = ({
     <div id="screen-history" className="min-h-screen bg-[#f7fbed] text-[#191d15] flex flex-col pb-24">
       <header className="bg-[#f7fbed] border-b border-[#e0e4d7] sticky top-0 z-30 flex items-center justify-between px-4 py-3 shadow-xs">
         <h1 className="text-[18px] font-bold text-[#316b00]">나의 소분 & 참여 내역</h1>
-        <button
-          type="button"
-          aria-label="설정"
-          onClick={() => onNavigate('location_setting')}
-          className="p-2 rounded-full hover:bg-[#e6eadc] transition-colors text-[#316b00] cursor-pointer"
-        >
-          <span className="material-symbols-outlined text-[24px]">settings</span>
-        </button>
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            aria-label="로그아웃"
+            onClick={onLogout}
+            className="p-2 rounded-full hover:bg-[#e6eadc] transition-colors text-[#316b00] cursor-pointer"
+          >
+            <span className="material-symbols-outlined text-[24px]">logout</span>
+          </button>
+          <button
+            type="button"
+            aria-label="설정"
+            onClick={() => onNavigate('location_setting')}
+            className="p-2 rounded-full hover:bg-[#e6eadc] transition-colors text-[#316b00] cursor-pointer"
+          >
+            <span className="material-symbols-outlined text-[24px]">settings</span>
+          </button>
+        </div>
       </header>
       <main className="flex-1 max-w-2xl w-full mx-auto px-4 py-4 flex flex-col gap-4">
         <div className="bg-[#ffffff] rounded-2xl p-5 border border-[#e0e4d7] shadow-xs">

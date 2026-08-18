@@ -51,7 +51,6 @@ export function LoginPage() {
             <span>소분소분</span>
           </div>
           <h1 className="text-[28px] leading-tight font-extrabold mb-2">로그인</h1>
-          <p className="text-[14px] leading-6 text-[#41493a]">가입한 이메일로 다시 시작하세요.</p>
         </div>
 
         <form onSubmit={submit} className="space-y-4">

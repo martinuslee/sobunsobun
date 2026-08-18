@@ -163,6 +163,14 @@ export function SignupPage() {
             {isSubmitting ? '가입 중...' : '가입하기'}
           </button>
 
+          <p className="text-center text-[11px] leading-5 text-[#68715f]">
+            가입 시{' '}
+            <Link href="/terms" className="font-bold text-[#316b00] underline underline-offset-2">
+              약관 및 개인정보 안내
+            </Link>
+            를 확인한 것으로 간주됩니다.
+          </p>
+
           <p className="text-center text-[13px] text-[#41493a]">
             이미 계정이 있나요?{' '}
             <Link href="/login" className="font-extrabold text-[#316b00]">

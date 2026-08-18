@@ -4,10 +4,10 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from backend.app.api.routes.items import get_or_create_user, item_or_404
-from backend.app.db.session import get_db
-from backend.app.models import Review, Tag
-from backend.app.schemas import ReviewCreate, ReviewRead, ReviewUpdate
+from .items import get_or_create_user, item_or_404
+from ...db.session import get_db
+from ...models import Review, Tag
+from ...schemas import ReviewCreate, ReviewRead, ReviewUpdate
 
 router = APIRouter(prefix="/reviews", tags=["reviews"])
 

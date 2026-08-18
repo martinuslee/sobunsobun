@@ -26,7 +26,6 @@ export const Home: React.FC<HomeProps> = ({
     { name: '음료', icon: 'local_drink' },
     { name: '간식', icon: 'cookie' },
     { name: '커피/차', icon: 'coffee' },
-    { name: '생활식품', icon: 'inventory_2' },
   ];
 
   const filteredItems = items.filter((item) => {

@@ -2,10 +2,10 @@ from urllib.parse import quote
 
 from sqlalchemy import select
 
-from backend.app.api.routes.items import get_or_create_category, get_or_create_location, get_or_create_user
-from backend.app.api.routes.reviews import get_or_create_tag
-from backend.app.db.session import SessionLocal
-from backend.app.models import ChatMessage, GroupBuyItem, Notification, Review
+from .api.routes.items import get_or_create_category, get_or_create_location, get_or_create_user
+from .api.routes.reviews import get_or_create_tag
+from .db.session import SessionLocal
+from .models import ChatMessage, GroupBuyItem, Notification, Review
 
 
 def product_image(label: str, accent: str, detail: str) -> str:

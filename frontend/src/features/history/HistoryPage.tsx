@@ -14,15 +14,32 @@ export function HistoryPage() {
   const router = useRouter();
   const selectedItemRef = useRef('');
   const currentLocation = useAppStore((state) => state.currentLocation);
+  const setCurrentUserName = useAppStore((state) => state.setCurrentUserName);
+  const setHasSeenLanding = useAppStore((state) => state.setHasSeenLanding);
   const { data: items = [], isLoading } = useQuery({ queryKey: queryKeys.items, queryFn: api.items });
   const navigate = (screen: ScreenType) => {
     router.push(screenPath(screen, selectedItemRef.current));
     window.scrollTo(0, 0);
   };
+  const logout = () => {
+    sessionStorage.removeItem('sobunsobun_current_user_name');
+    sessionStorage.removeItem('sobunsobun_seen_landing');
+    setCurrentUserName('');
+    setHasSeenLanding(false);
+    router.push('/login');
+  };
 
   if (isLoading) return <LoadingSkeleton />;
 
-  return <History items={items} currentLocation={currentLocation} onNavigate={navigate} onSelectItem={(item) => {
-    selectedItemRef.current = item.id;
-  }} />;
+  return (
+    <History
+      items={items}
+      currentLocation={currentLocation}
+      onNavigate={navigate}
+      onSelectItem={(item) => {
+        selectedItemRef.current = item.id;
+      }}
+      onLogout={logout}
+    />
+  );
 }

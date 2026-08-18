@@ -4,10 +4,10 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from backend.app.api.routes.items import get_or_create_user
-from backend.app.db.session import get_db
-from backend.app.models import Notification
-from backend.app.schemas import NotificationCreate, NotificationRead, NotificationUpdate
+from .items import get_or_create_user
+from ...db.session import get_db
+from ...models import Notification
+from ...schemas import NotificationCreate, NotificationRead, NotificationUpdate
 
 router = APIRouter(prefix="/notifications", tags=["notifications"])
 

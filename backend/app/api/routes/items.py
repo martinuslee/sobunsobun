@@ -5,9 +5,9 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from backend.app.db.session import get_db
-from backend.app.models import Category, GroupBuyItem, Location, User
-from backend.app.schemas import GroupBuyItemCreate, GroupBuyItemRead, GroupBuyItemUpdate
+from ...db.session import get_db
+from ...models import Category, GroupBuyItem, Location, User
+from ...schemas import GroupBuyItemCreate, GroupBuyItemRead, GroupBuyItemUpdate
 
 router = APIRouter(prefix="/items", tags=["items"])
 
