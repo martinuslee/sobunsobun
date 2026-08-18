@@ -1,20 +1,24 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Design
 
-# Run and deploy your AI Studio app
+초기 화면 설계와 컴포넌트 참고용 Vite 프로젝트입니다.
+런타임 제품 코드는 `frontend/`와 `backend/`를 기준으로 합니다.
 
-This contains everything you need to run your app locally.
+## 용도
 
-View your app in AI Studio: https://ai.studio/apps/b9ddc0ad-ba20-440f-a2aa-c50379486f10
+- 화면 구성과 카피 참고
+- 컴포넌트 스타일 비교
+- 프론트엔드 구현 전 시안 확인
 
-## Run Locally
+## 실행
 
-**Prerequisites:**  Node.js
+```bash
+cd design
+npm install
+npm run dev
+```
 
+## 주의
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- 실제 서비스 라우팅과 API 연결은 `frontend/`에 구현합니다.
+- 백엔드 DB와 CRUD는 `backend/`에 구현합니다.
+- 이 폴더의 `.env` 파일은 커밋하지 않습니다.
