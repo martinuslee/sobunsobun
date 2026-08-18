@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { api } from '@/lib/api';
 import { useAppStore } from '@/stores/appStore';
 
@@ -161,6 +162,13 @@ export function SignupPage() {
           >
             {isSubmitting ? '가입 중...' : '가입하기'}
           </button>
+
+          <p className="text-center text-[13px] text-[#41493a]">
+            이미 계정이 있나요?{' '}
+            <Link href="/login" className="font-extrabold text-[#316b00]">
+              로그인
+            </Link>
+          </p>
         </form>
       </section>
     </main>

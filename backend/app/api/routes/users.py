@@ -1,4 +1,5 @@
 import hashlib
+import hmac
 import re
 import secrets
 
@@ -9,7 +10,7 @@ from sqlalchemy.orm import Session
 
 from backend.app.db.session import get_db
 from backend.app.models import User
-from backend.app.schemas import EmailAvailabilityRead, UserRead, UserSignupCreate
+from backend.app.schemas import EmailAvailabilityRead, UserLoginCreate, UserRead, UserSignupCreate
 
 router = APIRouter(prefix="/users", tags=["users"])
 EMAIL_PATTERN = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
@@ -47,6 +48,23 @@ def hash_password(password: str) -> str:
     salt = secrets.token_hex(16)
     digest = hashlib.pbkdf2_hmac("sha256", password.encode(), salt.encode(), 100_000).hex()
     return f"pbkdf2_sha256$100000${salt}${digest}"
+
+
+def verify_password(password: str, password_hash: str | None) -> bool:
+    if not password_hash:
+        return False
+
+    try:
+        algorithm, iterations, salt, expected = password_hash.split("$")
+        iteration_count = int(iterations)
+    except ValueError:
+        return False
+
+    if algorithm != "pbkdf2_sha256":
+        return False
+
+    digest = hashlib.pbkdf2_hmac("sha256", password.encode(), salt.encode(), iteration_count).hex()
+    return hmac.compare_digest(digest, expected)
 
 
 def serialize_user(user: User) -> dict[str, str | int]:
@@ -93,4 +111,16 @@ def signup(payload: UserSignupCreate, db: Session = Depends(get_db)) -> dict[str
         raise HTTPException(status_code=409, detail=str(exc.orig)) from exc
 
     db.refresh(user)
+    return serialize_user(user)
+
+
+@router.post("/login", response_model=UserRead)
+def login(payload: UserLoginCreate, db: Session = Depends(get_db)) -> dict[str, str | int]:
+    """이메일과 비밀번호로 사용자를 로그인 처리합니다."""
+
+    email = normalize_email(payload.email)
+    user = db.scalar(select(User).where(User.email == email))
+    if not user or not verify_password(payload.password, user.password_hash):
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+
     return serialize_user(user)

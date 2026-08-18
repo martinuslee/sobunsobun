@@ -71,6 +71,13 @@ class UserSignupCreate(BaseModel):
     password_confirm: str = Field(min_length=8)
 
 
+class UserLoginCreate(BaseModel):
+    """로그인 요청 본문입니다."""
+
+    email: str = Field(min_length=3, max_length=255)
+    password: str = Field(min_length=8)
+
+
 class UserRead(BaseModel):
     """사용자 API 응답 본문입니다."""
 

@@ -47,6 +47,7 @@ Normalized tables:
 - `DELETE /items/{item_id}?host_name={작성자명}`
 - `GET /users/email-available?email={이메일}`
 - `POST /users/signup`
+- `POST /users/login`
 - `GET /chat-messages`
 - `POST /chat-messages`
 - `PATCH /chat-messages/{message_id}`
@@ -92,6 +93,15 @@ make seed
   "email": "green@example.com",
   "password": "password123",
   "password_confirm": "password123"
+}
+```
+
+`POST /users/login` body:
+
+```json
+{
+  "email": "green@example.com",
+  "password": "password123"
 }
 ```
 

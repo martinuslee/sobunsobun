@@ -48,6 +48,22 @@ def test_backend_crud() -> None:
                 "password_confirm": "password456",
             },
         ).status_code == 400
+        assert client.post(
+            "/users/login",
+            json={
+                "email": "green@example.com",
+                "password": "wrongpass",
+            },
+        ).status_code == 401
+        login = client.post(
+            "/users/login",
+            json={
+                "email": "green@example.com",
+                "password": "password123",
+            },
+        )
+        assert login.status_code == 200
+        assert login.json()["name"] == "초록이웃"
 
         payload = {
             "title": "딸기 같이 나눠요",

@@ -10,6 +10,7 @@ from backend.app.api.routes.users import router as users_router
 app = FastAPI(title="sobunsobun API")
 app.add_middleware(
     CORSMiddleware,
+    allow_origins=["https://sobunsobun-mvp.vercel.app"],
     allow_origin_regex=r"http://(localhost|127\.0\.0\.1):\d+",
     allow_methods=["*"],
     allow_headers=["*"],

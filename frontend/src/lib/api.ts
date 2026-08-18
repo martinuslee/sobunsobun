@@ -75,6 +75,11 @@ type SignupPayload = {
   passwordConfirm: string;
 };
 
+type LoginPayload = {
+  email: string;
+  password: string;
+};
+
 function toGroupBuyItem(item: ApiGroupBuyItem): GroupBuyItem {
   return {
     id: String(item.id),
@@ -198,6 +203,11 @@ export const api = {
         password: payload.password,
         password_confirm: payload.passwordConfirm,
       }),
+    }),
+  login: async (payload: LoginPayload) =>
+    request<ApiUser>('/users/login', {
+      method: 'POST',
+      body: JSON.stringify(payload),
     }),
   items: async () => list<ApiGroupBuyItem, GroupBuyItem>('/items', toGroupBuyItem),
   createItem: async (item: GroupBuyItem) =>
